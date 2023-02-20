@@ -29,9 +29,8 @@ function Barbers() {
     return(
         <Stack>
             {selectedBarber}
-            <div onClick={() => selectBarber(1)}>Выбрать</div>
             <div>{barberList?.map((barber) => {
-                return <BarberCard onClick={() => selectBarber(1)} barber={barber} key={barber.id}/>
+                return <BarberCard barber={barber} key={barber.id}/>
             })}</div>
         </Stack>
     )

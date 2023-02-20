@@ -1,18 +1,28 @@
-import {Box} from "@mui/material";
-import {barber} from "../pages/Barbers";
+import {Box, Stack} from "@mui/material";
 import { useAppSelector, useAppDispatch } from '../hooks'
+import {selectNewBarber} from "../features/barber/barberSlice";
+import InfoIcon from '@mui/icons-material/Info';
+
 function BarberCard(props : any) {
-    const barber = useAppSelector((state) => state.barber)
+    const barberId = useAppSelector((state) => state.barber.barberId)
     const dispatch = useAppDispatch()
     return(
-        <Box  sx={{
-            border: 1,
+        <Box onClick={() => dispatch(selectNewBarber(props.barber.id))}  sx={{
+            border: barberId == props.barber.id ? 1 : 'none',
             borderRadius: 2,
             borderColor: 'black',
             height: 70,
             bgcolor: 'white',
         }}>
-            {barber.name}
+            <Stack direction="row" alignItems="center" justifyContent="space-between">
+                <div>
+                    <img src="" alt=""/>
+                    <div>{props.barber.name}</div>
+                </div>
+                <div>
+                    <InfoIcon fontSize={"large"}/>
+                </div>
+            </Stack>
         </Box>
     )
 }
