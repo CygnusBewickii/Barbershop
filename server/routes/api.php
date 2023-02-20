@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BarberController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,10 +18,11 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-
-Route::get('/getUsers', function (Request $request) {
-   return response()->json([
-       'name' => 'gay',
-       'age' => 122,
-   ]);
+Route::prefix('/barbers')->group(function () {
+    Route::get('/', [BarberController::class, 'getAllBarbers']);
+    Route::get('/{id}', [BarberController::class, 'getBarber']);
+    Route::post('/', [BarberController::class, 'createBarber']);
+    Route::put('/{id}', [BarberController::class, 'updateBarber']);
 });
+
+
