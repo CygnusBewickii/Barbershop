@@ -4,7 +4,7 @@ function App() {
 
 
   return (
-      <Container maxWidth='md'>
+      <Container maxWidth='sm'>
           <Box
               sx={{
                   width: 1,
