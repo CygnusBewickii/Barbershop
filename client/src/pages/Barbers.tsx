@@ -4,6 +4,7 @@ import {useSelector} from "react-redux";
 import {useEffect, useState} from "react";
 import BarberCard from "../components/BarberCard";
 import {useAppSelector} from "../hooks";
+import {Link} from "react-router-dom";
 
 export interface barber {
     id: number
@@ -36,13 +37,16 @@ function Barbers() {
                 return <BarberCard barber={barber} key={barber.id}/>
             })}</div>
             { barberId != 0 &&
-                <Button variant="contained" sx={{
-                    bgcolor: 'black',
-                    mt:1,
-                    '&:hover': {
-                        bgcolor: 'black'
-                    }
-                }}>Вбрать барбера</Button>
+                <Link to={'/services'}>
+                    <Button variant="contained" sx={{
+                        bgcolor: 'black',
+                        mt:1,
+                        width: 1,
+                        '&:hover': {
+                            bgcolor: 'black'
+                        }
+                    }}>Выбрать барбера</Button>
+                </Link>
             }
         </Stack>
     )

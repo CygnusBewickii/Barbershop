@@ -1,8 +1,19 @@
-import {Avatar, Box, Modal, Stack, Typography} from "@mui/material";
+import {
+    Avatar,
+    Box,
+    Dialog, DialogActions,
+    DialogContent,
+    DialogContentText,
+    DialogTitle,
+    Modal,
+    Stack,
+    Typography
+} from "@mui/material";
 import { useAppSelector, useAppDispatch } from '../hooks'
 import {selectNewBarber} from "../features/barber/barberSlice";
 import InfoIcon from '@mui/icons-material/Info';
 import {useState} from "react";
+import CloseIcon from '@mui/icons-material/Close';
 
 function BarberCard(props : any) {
     const barberId = useAppSelector((state) => state.barber.barberId)
@@ -39,16 +50,34 @@ function BarberCard(props : any) {
                     </div>
                 </Stack>
                 <div onClick={() => setIsOpen(true)}>
-                    <InfoIcon fontSize={"large"}/>
+                    <InfoIcon fontSize={"large"} sx={{
+                        '&:hover': {
+                            cursor: 'pointer'
+                        }
+                    }}/>
                 </div>
             </Stack>
-            <Modal open={isOpen} onClose={ () => {setIsOpen(false)}}>
-                <Box sx={{
-                    width: '50%',
-                    height: 120,
-                    bgcolor: 'white'
-                }}>[</Box>
-            </Modal>
+            <Dialog open={isOpen} maxWidth={'sm'} fullWidth={true} onClose={ () => {setIsOpen(false)}}>
+                <DialogTitle>
+                    Описание специалиста
+                </DialogTitle>
+                <DialogContent sx={{height: 200}}>
+                    <DialogContentText>
+                        {props.barber.description}
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions sx={{
+                    position: 'absolute',
+                    top: 10,
+                    right: 10
+                }}>
+                    <CloseIcon onClick={() => {setIsOpen(false)}} sx={{
+                        '&:hover': {
+                            cursor: 'pointer'
+                        }
+                    }}/>
+                </DialogActions>
+            </Dialog>
         </Box>
     )
 }
