@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BarberController;
+use App\Http\Controllers\ServiceController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -24,5 +25,7 @@ Route::prefix('/barbers')->group(function () {
     Route::post('/', [BarberController::class, 'createBarber']);
     Route::put('/{id}', [BarberController::class, 'updateBarber']);
 });
-
+Route::prefix('/services')->group(function () {
+   Route::get('/barber/{id}', [ServiceController::class, 'getServicesByBarberId']);
+});
 

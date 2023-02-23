@@ -22,7 +22,8 @@ function Barbers() {
     const barberId = useAppSelector((state) => state.barber.barberId)
 
     const fetchBarbers = async () => {
-        const response : Array<barber> = await axios.get('http://localhost:8000/api/barbers').then(response => response.data);
+        const response : Array<barber> = await axios.get('http://localhost:8000/api/barbers')
+            .then(response => response.data);
         setBarberList(response);
     }
     useEffect(() => {fetchBarbers()}, []);
