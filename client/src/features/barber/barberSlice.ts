@@ -14,6 +14,9 @@ export const barberSlice = createSlice({
     reducers: {
         selectNewBarber: (state, action) => {
             state.barberId = action.payload
+        },
+        selectNewService: (state, action) => {
+
         }
     }
 })
