@@ -10,13 +10,13 @@ import {
     Typography
 } from "@mui/material";
 import { useAppSelector, useAppDispatch } from '../hooks'
-import {selectNewBarber} from "../features/barber/barberSlice";
+import {selectNewBarber} from "../features/barber/barbershopSlice";
 import InfoIcon from '@mui/icons-material/Info';
 import {useState} from "react";
 import CloseIcon from '@mui/icons-material/Close';
 
 function BarberCard(props : any) {
-    const barberId = useAppSelector((state) => state.barber.barberId)
+    const barberId = useAppSelector((state) => state.barbershop.barberId)
     const dispatch = useAppDispatch()
     const [isOpen, setIsOpen] = useState<boolean>(false)
     return(

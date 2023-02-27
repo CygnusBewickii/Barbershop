@@ -1,9 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit'
-import barberReducer from './features/barber/barberSlice'
+import barbershopReducer from './features/barber/barbershopSlice'
 
 const store = configureStore({
     reducer: {
-        barber: barberReducer,
+        barbershop: barbershopReducer,
     },
 })
 

@@ -19,7 +19,7 @@ function Barbers() {
 
     const [barberList, setBarberList] = useState<barber[]>();
     const [selectedBarber, setSelectedBarber] = useState<number>();
-    const barberId = useAppSelector((state) => state.barber.barberId)
+    const barberId = useAppSelector((state) => state.barbershop.barberId)
 
     const fetchBarbers = async () => {
         const response : Array<barber> = await axios.get('http://localhost:8000/api/barbers')

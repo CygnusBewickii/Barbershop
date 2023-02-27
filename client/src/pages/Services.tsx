@@ -11,7 +11,7 @@ interface Service {
     description: string
 }
 function Services() {
-    const barberId = useAppSelector((state) => state.barber.barberId)
+    const barberId = useAppSelector((state) => state.barbershop.barberId)
     const dispatch = useAppDispatch()
     const [services, setServices] = useState<Service[]>();
     const fetchServices = async () => {
