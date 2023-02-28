@@ -1,10 +1,12 @@
-import {Button, Stack} from "@mui/material";
+import {Button, CircularProgress, Stack} from "@mui/material";
 import axios from "axios";
 import {useSelector} from "react-redux";
 import {useEffect, useState} from "react";
 import BarberCard from "../components/BarberCard";
 import {useAppSelector} from "../hooks";
 import {Link} from "react-router-dom";
+import SubmitButton from "../components/SubmitButton";
+import Loading from "../components/Loading";
 
 export interface barber {
     id: number
@@ -16,15 +18,17 @@ export interface barber {
     updated_at: Date,
 }
 function Barbers() {
-
+    const [isLoading, setIsLoading] = useState<boolean>();
     const [barberList, setBarberList] = useState<barber[]>();
     const [selectedBarber, setSelectedBarber] = useState<number>();
     const barberId = useAppSelector((state) => state.barbershop.barberId)
 
     const fetchBarbers = async () => {
+        setIsLoading(true)
         const response : Array<barber> = await axios.get('http://localhost:8000/api/barbers')
             .then(response => response.data);
         setBarberList(response);
+        setIsLoading(false)
     }
     useEffect(() => {fetchBarbers()}, []);
 
@@ -34,21 +38,11 @@ function Barbers() {
 
     return(
         <Stack>
+            <Loading isLoading={isLoading}/>
             <div>{barberList?.map((barber) => {
                 return <BarberCard barber={barber} key={barber.id}/>
             })}</div>
-            { barberId != 0 &&
-                <Link to={'/services'}>
-                    <Button variant="contained" sx={{
-                        bgcolor: 'black',
-                        mt:1,
-                        width: 1,
-                        '&:hover': {
-                            bgcolor: 'black'
-                        }
-                    }}>Выбрать барбера</Button>
-                </Link>
-            }
+            <SubmitButton id={barberId} text={'выбрать барбера'}/>
         </Stack>
     )
 }

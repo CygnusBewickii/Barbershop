@@ -1,5 +1,5 @@
 import {Box, Container, Typography} from "@mui/material";
-import {Outlet} from "react-router-dom";
+import {Link, Outlet} from "react-router-dom";
 function App() {
 
 
@@ -17,7 +17,9 @@ function App() {
                   marginY: 1.75,
               }}
           >
-              <Typography variant="h1" sx={{fontSize: 30}}>Barbershop</Typography>
+              <Link to='/' style={{textDecoration: 'none', color: 'black'}}>
+                  <Typography variant="h1" sx={{fontSize: 30}}>Barbershop</Typography>
+              </Link>
           </Box>
           <Outlet/>
       </Container>
