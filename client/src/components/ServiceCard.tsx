@@ -31,7 +31,8 @@ function serviceCard(props : any) {
             borderColor: 'black',
             height: 90,
             bgcolor: 'white',
-            paddingX: 2
+            paddingX: 2,
+            marginBottom: 1,
         }}>
             <Stack direction="row" alignItems="center" alignContent="center" justifyContent="space-between" sx={{
                 height: 1

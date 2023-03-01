@@ -8,7 +8,6 @@ function SubmitButton(props: any) {
                 <Link to={'/services'}>
                     <Button variant="contained" sx={{
                         bgcolor: 'black',
-                        mt:1,
                         width: 1,
                         '&:hover': {
                             bgcolor: 'black'
