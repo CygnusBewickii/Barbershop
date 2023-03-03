@@ -12,6 +12,7 @@ import './App.css'
 import Index from "./pages/Index";
 import Barbers from "./pages/Barbers";
 import Services from "./pages/Services";
+import Appointment from "./pages/Appointment";
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
@@ -22,6 +23,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
                       <Route index element={<Index/>} />
                       <Route path="/barbers" element={<Barbers/>}/>
                       <Route path="/services" element={<Services/>}/>
+                      <Route path="/appointment" element={<Appointment/>}/>
                   </Route>
               </Routes>
           </BrowserRouter>

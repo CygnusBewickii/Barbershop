@@ -35,7 +35,7 @@ function Services() {
             {services && services.map((service) => {
                 return <ServiceCard service={service}/>
             })}
-            <SubmitButton id={serviceId} text={'выбрать услугу'}/>
+            <SubmitButton id={serviceId} url={'/appointment'} text={'выбрать услугу'}/>
         </Stack>
     
     )

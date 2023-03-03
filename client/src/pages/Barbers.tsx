@@ -42,7 +42,7 @@ function Barbers() {
             <div>{barberList?.map((barber) => {
                 return <BarberCard barber={barber} key={barber.id}/>
             })}</div>
-            <SubmitButton id={barberId} text={'выбрать барбера'}/>
+            <SubmitButton id={barberId} url={'/services'} text={'выбрать барбера'}/>
         </Stack>
     )
 }

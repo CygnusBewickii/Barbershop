@@ -5,7 +5,7 @@ function SubmitButton(props: any) {
     return(
         <div>
             {props.id != 0 &&
-                <Link to={'/services'}>
+                <Link to={props.url}>
                     <Button variant="contained" sx={{
                         bgcolor: 'black',
                         width: 1,
