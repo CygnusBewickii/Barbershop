@@ -16,7 +16,11 @@ class Barber extends Model
         'description'
     ];
 
-    public function services(): BelongsToMany {
+    public function services() {
         return $this->belongsToMany(Service::class, 'barber_service');
+    }
+
+    public function time_slots() {
+        return $this->hasMany(time_slot::class);
     }
 }

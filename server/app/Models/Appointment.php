@@ -12,6 +12,7 @@ class Appointment extends Model
 
     protected $fillable = [
         'date',
+        'time_slot_id',
         'barber_id',
         'service_id',
     ];
@@ -21,5 +22,9 @@ class Appointment extends Model
 
     public function service(): HasOne {
         return $this->hasOne(Service::class);
+    }
+
+    public function  time_slot() {
+        return $this->hasOne(time_slot::class);
     }
 }

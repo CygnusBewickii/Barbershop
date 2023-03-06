@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Barber;
+use App\Models\Day;
+use App\Models\time_slot;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -53,6 +55,15 @@ class BarberController extends Controller
         $barber::query()->update($request->all());
         return response()->json([
            'message' => 'Barber information updated successful'
+        ]);
+    }
+
+    public function getFreeTime(Request $request, $id, $date) {
+        $barber = Barber::query()->find($id);
+        $day = Day::query()->where('date', $date)->first();
+        $freeTime = time_slot::query()->where('barber_id', $barber->id)->where('day_id', $day->id)->where('client_name', null)->get();
+        return response()->json([
+            'message' => $freeTime,
         ]);
     }
 }

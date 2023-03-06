@@ -24,6 +24,7 @@ Route::prefix('/barbers')->group(function () {
     Route::get('/{id}', [BarberController::class, 'getBarber']);
     Route::post('/', [BarberController::class, 'createBarber']);
     Route::put('/{id}', [BarberController::class, 'updateBarber']);
+    Route::get('/{id}/getFreeTime/{date}', [BarberController::class, 'getFreeTime']);
 });
 Route::prefix('/services')->group(function () {
    Route::get('/barber/{id}', [ServiceController::class, 'getServicesByBarberId']);
