@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Appointment;
 use App\Models\Barber;
 use App\Models\Day;
 use App\Models\time_slot;
@@ -61,7 +62,24 @@ class BarberController extends Controller
     public function getFreeTime(Request $request, $id, $date) {
         $barber = Barber::query()->find($id);
         $day = Day::query()->where('date', $date)->first();
-        $freeTime = time_slot::query()->where('barber_id', $barber->id)->where('day_id', $day->id)->where('client_name', null)->get();
+        if($day == null) {
+            $currentDate = date("Y-m-d");
+            $newDay = Day::query()->create([
+                'date' => $currentDate
+            ]);
+            $dayId = $newDay->id;
+            $barberId = $barber->id;
+            for ($hours = 12; $hours <= 20; $hours++) {
+                time_slot::query()->create([
+                    'barber_id' => $barberId,
+                    'day_id' => $dayId,
+                    'time' => $hours.':00',
+                ]);
+            }
+        }
+        $day = Day::query()->where('date', $date)->first();
+        $freeTime = time_slot::query()->where('barber_id', $barber->id)
+            ->where('day_id', $day->id)->where('client_name', null)->get();
         return response()->json([
             'message' => $freeTime,
         ]);
