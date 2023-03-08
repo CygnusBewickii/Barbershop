@@ -61,13 +61,18 @@ class BarberController extends Controller
 
     public function getFreeTime(Request $request, $id, $date) {
         $barber = Barber::query()->find($id);
+        if (!$barber) {
+            return response()->json([
+                'message' => 'Error',
+                'error' => "There isn't barber with id ${id}"
+            ]);
+        }
         $day = Day::query()->where('date', $date)->first();
         if($day == null) {
-            $currentDate = date("Y-m-d");
-            $newDay = Day::query()->create([
-                'date' => $currentDate
+            $day = Day::query()->create([
+                'date' => $date
             ]);
-            $dayId = $newDay->id;
+            $dayId = $day->id;
             $barberId = $barber->id;
             for ($hours = 12; $hours <= 20; $hours++) {
                 time_slot::query()->create([
@@ -77,11 +82,10 @@ class BarberController extends Controller
                 ]);
             }
         }
-        $day = Day::query()->where('date', $date)->first();
         $freeTime = time_slot::query()->where('barber_id', $barber->id)
             ->where('day_id', $day->id)->where('client_name', null)->get();
         return response()->json([
-            'message' => $freeTime,
+            $freeTime
         ]);
     }
 }

@@ -33,7 +33,7 @@ function Services() {
         <Stack>
             <Loading isLoading={isLoading}/>
             {services && services.map((service) => {
-                return <ServiceCard service={service}/>
+                return <ServiceCard service={service} key={service.id}/>
             })}
             <SubmitButton id={serviceId} url={'/appointment'} text={'выбрать услугу'}/>
         </Stack>
