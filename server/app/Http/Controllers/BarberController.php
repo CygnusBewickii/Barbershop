@@ -74,7 +74,7 @@ class BarberController extends Controller
             ]);
             $dayId = $day->id;
             $barberId = $barber->id;
-            for ($hours = 12; $hours <= 20; $hours++) {
+            for ($hours = 9; $hours <= 21; $hours++) {
                 time_slot::query()->create([
                     'barber_id' => $barberId,
                     'day_id' => $dayId,
