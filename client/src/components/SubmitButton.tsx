@@ -4,7 +4,7 @@ import {Button} from "@mui/material";
 function SubmitButton(props: any) {
     return(
         <div>
-            {props.id != 0 &&
+            {props.data != null &&
                 <Link to={props.url}>
                     <Button variant="contained" sx={{
                         bgcolor: 'black',

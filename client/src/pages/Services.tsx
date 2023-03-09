@@ -1,9 +1,8 @@
-import {useAppDispatch, useAppSelector} from "../hooks";
-import {Button, Stack} from "@mui/material";
+import { useAppSelector} from "../hooks";
+import { Stack } from "@mui/material";
 import axios from "axios";
 import {useEffect, useState} from "react";
 import ServiceCard from "../components/ServiceCard";
-import {Link} from "react-router-dom";
 import SubmitButton from "../components/SubmitButton";
 import Loading from "../components/Loading";
 
@@ -17,7 +16,6 @@ function Services() {
     const [isLoading, setIsLoading] = useState<boolean>()
     const barberId = useAppSelector((state) => state.barbershop.barberId)
     const serviceId = useAppSelector((state) => state.barbershop.serviceId)
-    const dispatch = useAppDispatch()
     const [services, setServices] = useState<Service[]>();
     const fetchServices = async () => {
         setIsLoading(true)
@@ -35,7 +33,7 @@ function Services() {
             {services && services.map((service) => {
                 return <ServiceCard service={service} key={service.id}/>
             })}
-            <SubmitButton id={serviceId} url={'/appointment'} text={'выбрать услугу'}/>
+            <SubmitButton data={serviceId} url={'/appointment'} text={'выбрать услугу'}/>
         </Stack>
     
     )
