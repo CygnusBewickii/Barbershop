@@ -18,16 +18,20 @@ interface time_slot {
 function Appointment() {
     const barberId = useAppSelector((state) => state.barbershop.barberId)
     const serviceId = useAppSelector((state) => state.barbershop.serviceId)
-    const [time, setTime] = useState<Dayjs | null>(dayjs());
-    const [formatTime, setFormatTime] = useState<string | undefined>(dayjs().format('YYYY-MM-DD'));
+    const [date, setDate] = useState<Dayjs | null>(dayjs());
+    const [formatDate, setFormatDate] = useState<string | undefined>(dayjs().format('YYYY-MM-DD'));
     const [freeTime, setFreeTime] = useState<Array<time_slot>>();
+    const [time, setTime] = useState<string>();
     const fetchBarberFreeTime = async () => {
-        const response: any = await axios.get(`http://127.0.0.1:8000/api/barbers/${barberId}/getFreeTime/${formatTime}`)
+        const response: any = await axios.get(`http://127.0.0.1:8000/api/barbers/${barberId}/getFreeTime/${formatDate}`)
             .then(response => response.data[0])
         setFreeTime(response)
     }
-    useEffect(() => {fetchBarberFreeTime()}, [formatTime])
-    useEffect(() => setFormatTime(time?.format('YYYY-MM-DD')), [time])
+
+    useEffect(() => {fetchBarberFreeTime()}, [formatDate])
+    useEffect(() => setFormatDate(date?.format('YYYY-MM-DD')), [date])
+
+
     return(
         <Box sx={{
             bgcolor: 'white',
@@ -36,8 +40,8 @@ function Appointment() {
         }}>
             <Box sx={{mb: 2}}>
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <DatePicker onChange={(newTime) => {setTime(newTime)}}
-                                value={time}
+                    <DatePicker onChange={(newDate) => {setDate(newDate)}}
+                                value={date}
                                 renderInput={(params) => <TextField {...params}/>}
                                 label={'Выберите дату'}
                                 inputFormat={'DD-MM-YYYY'}
