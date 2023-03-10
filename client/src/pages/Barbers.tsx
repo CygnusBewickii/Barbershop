@@ -1,10 +1,8 @@
-import {Button, CircularProgress, Stack} from "@mui/material";
+import {Stack} from "@mui/material";
 import axios from "axios";
-import {useSelector} from "react-redux";
 import {useEffect, useState} from "react";
 import BarberCard from "../components/BarberCard";
 import {useAppSelector} from "../hooks";
-import {Link} from "react-router-dom";
 import SubmitButton from "../components/SubmitButton";
 import Loading from "../components/Loading";
 
@@ -20,7 +18,6 @@ export interface barber {
 function Barbers() {
     const [isLoading, setIsLoading] = useState<boolean>();
     const [barberList, setBarberList] = useState<barber[]>();
-    const [selectedBarber, setSelectedBarber] = useState<number>();
     const barberId = useAppSelector((state) => state.barbershop.barberId)
 
     const fetchBarbers = async () => {
@@ -31,10 +28,6 @@ function Barbers() {
         setIsLoading(false)
     }
     useEffect(() => {fetchBarbers()}, []);
-
-    const selectBarber = (id : number) => {
-        setSelectedBarber(id)
-    }
 
     return(
         <Stack>

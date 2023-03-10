@@ -1,4 +1,4 @@
-import {Box, Stack, Typography} from "@mui/material";
+import {Stack} from "@mui/material";
 import {Link} from "react-router-dom";
 import IndexButton from "../components/IndexButton";
 function Index() {

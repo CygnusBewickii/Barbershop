@@ -1,7 +1,5 @@
 import {
-    Avatar,
     Box,
-    Button,
     Dialog, DialogActions,
     DialogContent,
     DialogContentText,
@@ -9,12 +7,8 @@ import {
     Stack,
     Typography
 } from "@mui/material";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import {useAppDispatch, useAppSelector} from "../hooks";
-import BarberCard from "./BarberCard";
-import {Link} from "react-router-dom";
-import {barber} from "../pages/Barbers";
-import axios from "axios";
 import {selectNewService} from "../features/barber/barbershopSlice";
 import InfoIcon from "@mui/icons-material/Info";
 import CloseIcon from "@mui/icons-material/Close";

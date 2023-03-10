@@ -2,7 +2,7 @@ import {DatePicker, LocalizationProvider} from "@mui/x-date-pickers";
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import {useEffect, useState} from "react";
 import {Box, Grid, TextField, Typography} from "@mui/material";
-import dayjs, {Dayjs} from "dayjs";
+import dayjs from "dayjs";
 import axios from "axios";
 import {useAppSelector} from "../hooks";
 import CalendarItem from "../components/CalendarItem";
