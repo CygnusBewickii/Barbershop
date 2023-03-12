@@ -4,15 +4,19 @@ import dayjs, {Dayjs} from "dayjs";
 interface BarbershopState {
     barberId: number | null,
     serviceId: number | null,
-    appointment_time: string | null,
-    appointment_date: Dayjs | null,
+    appointmentTime: string | null,
+    appointmentDate: Dayjs | null,
+    client_phone: string | null,
+    client_name: string | null,
 }
 
 const initialState: BarbershopState = {
     barberId: null,
     serviceId: null,
-    appointment_time: null,
-    appointment_date: dayjs()
+    appointmentTime: null,
+    appointmentDate: dayjs(),
+    client_phone: null,
+    client_name: null
 }
 export const barbershopSlice = createSlice({
     name: 'barbershop',
@@ -25,16 +29,22 @@ export const barbershopSlice = createSlice({
             state.serviceId = action.payload
         },
         selectNewAppointmentTime: (state, action) => {
-            state.appointment_time = action.payload
+            state.appointmentTime = action.payload
         },
         selectNewAppointmentDate: (state, action) => {
-            state.appointment_date = action.payload
+            state.appointmentDate = action.payload
+        },
+        selectNewClientPhone: (state, action) => {
+            state.client_phone = action.payload
+        },
+        selectNewClientName: (state, action) => {
+            state.client_name = action.payload
         }
     }
 })
 
 
-export const { selectNewBarber, selectNewService, selectNewAppointmentTime, selectNewAppointmentDate } = barbershopSlice.actions
+export const { selectNewBarber, selectNewService, selectNewAppointmentTime, selectNewAppointmentDate, selectNewClientPhone, selectNewClientName} = barbershopSlice.actions
 
 
 export default barbershopSlice.reducer

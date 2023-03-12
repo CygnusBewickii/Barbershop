@@ -1,12 +1,21 @@
 import {Box, Button, TextField, Typography} from "@mui/material";
-import {useState} from "react";
+import PhoneNumberInput from "../components/PhoneNumberInput";
+import {useAppSelector} from "../hooks";
+import {useDispatch} from "react-redux";
+import {selectNewClientName} from "../features/barber/barbershopSlice";
+import axios from "axios";
 
 function PersonalData() {
-    const [clientName, setClientName] = useState<string>();
-    const [clientPhone, setClientPhone] = useState<string>();
+    const barberId = useAppSelector((state) => state.barbershop.barberId);
+    const serviceId = useAppSelector((state) => state.barbershop.serviceId);
+    const appointmentTime = useAppSelector(state => state.barbershop.appointmentTime);
+    const appointmentDate = useAppSelector(state => state.barbershop.appointmentDate)
+    const clientName = useAppSelector(state => state.barbershop.client_name);
+    const clientPhone = useAppSelector(state => state.barbershop.client_phone);
+    const dispatch = useDispatch();
 
-     const handlePhoneNumberInput = (value: any) => {
-        setClientPhone(value)
+    const createAppointment = async () => {
+        await axios.post('')
     }
     return(
         <Box sx={{
@@ -26,14 +35,14 @@ function PersonalData() {
                 <Box sx={{
                     mb: 1.5
                 }}>
-                    <TextField required id={"client-name"} label={"Ваше имя"} onChange={(event) => {setClientName(event.target.value)}} />
+                    <TextField required name={"client-name"} label={"Ваше имя"} onChange={(event) => {dispatch(selectNewClientName(event.target.name))}} />
                 </Box>
                 <Box sx={{
                     mb: 2
                 }}>
-                    <TextField type='tel' required id={"client-phone"} label={"Ваш номер телефона"} onChange={(event) => {setClientPhone(event.target.value)}}/>
+                    <PhoneNumberInput/>
                 </Box>
-                <Button type='submit' variant='contained' sx={{
+                <Button type='submit' variant='contained' onClick={createAppointment} sx={{
                     bgcolor: 'black',
                     '&:hover': {
                         bgcolor: 'black'

@@ -20,8 +20,8 @@ interface time_slot {
 }
 function Appointment() {
     const barberId = useAppSelector((state) => state.barbershop.barberId)
-    const appointment_time = useAppSelector((state) => state.barbershop.appointment_time)
-    const appointment_date = useAppSelector((state) => state.barbershop.appointment_date)
+    const appointmentTime = useAppSelector((state) => state.barbershop.appointmentTime)
+    const appointmentDate = useAppSelector((state) => state.barbershop.appointmentDate)
     const dispatch = useDispatch()
     const [formatDate, setFormatDate] = useState<string | undefined>(dayjs().format('YYYY-MM-DD'));
     const [freeTime, setFreeTime] = useState<Array<time_slot>>();
@@ -32,7 +32,7 @@ function Appointment() {
     }
 
     useEffect(() => {fetchBarberFreeTime()}, [formatDate])
-    useEffect(() => setFormatDate(appointment_date?.format('YYYY-MM-DD')), [appointment_date])
+    useEffect(() => setFormatDate(appointmentDate?.format('YYYY-MM-DD')), [appointmentDate])
 
 
     return(
@@ -44,7 +44,7 @@ function Appointment() {
             <Box sx={{mb: 2}}>
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <DatePicker onChange={(newDate) => {dispatch(selectNewAppointmentDate(newDate))}}
-                                value={appointment_date}
+                                value={appointmentDate}
                                 renderInput={(params) => <TextField {...params}/>}
                                 label={'Выберите дату'}
                                 inputFormat={'DD-MM-YYYY'}
@@ -62,14 +62,14 @@ function Appointment() {
                     }) }
                 </Grid>
             </Box>
-            { appointment_date != null && appointment_time != null &&
+            { appointmentDate != null && appointmentTime != null &&
                 <Box sx={{mb: 2}}>
                     <Typography>
-                        <span>Выбранное время: { appointment_time }</span>
+                        <span>Выбранное время: { appointmentTime }</span>
                     </Typography>
                 </Box>
             }
-            <SubmitButton data={appointment_time} url={'personal_data'} text={'Выбрать время'}/>
+            <SubmitButton data={appointmentTime} url={'personal_data'} text={'Выбрать время'}/>
         </Box>
     )
 }

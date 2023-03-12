@@ -29,4 +29,7 @@ Route::prefix('/barbers')->group(function () {
 Route::prefix('/services')->group(function () {
    Route::get('/barber/{id}', [ServiceController::class, 'getServicesByBarberId']);
 });
+Route::prefix('/appointments')->group(function () {
+   Route::post('/createAppointment', []);
+});
 
