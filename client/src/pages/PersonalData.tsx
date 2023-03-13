@@ -10,8 +10,8 @@ function PersonalData() {
     const serviceId = useAppSelector((state) => state.barbershop.serviceId);
     const appointmentTime = useAppSelector(state => state.barbershop.appointmentTime);
     const appointmentDate = useAppSelector(state => state.barbershop.appointmentDate)
-    const clientName = useAppSelector(state => state.barbershop.client_name);
-    const clientPhone = useAppSelector(state => state.barbershop.client_phone);
+    const clientName = useAppSelector(state => state.barbershop.clientName);
+    const clientPhone = useAppSelector(state => state.barbershop.clientPhone);
     const dispatch = useDispatch();
 
     const createAppointment = async () => {

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\BarberController;
 use App\Http\Controllers\ServiceController;
 use Illuminate\Http\Request;
@@ -30,6 +31,6 @@ Route::prefix('/services')->group(function () {
    Route::get('/barber/{id}', [ServiceController::class, 'getServicesByBarberId']);
 });
 Route::prefix('/appointments')->group(function () {
-   Route::post('/createAppointment', []);
+   Route::post('/createAppointment', [AppointmentController::class, 'createAppointment']);
 });
 

@@ -6,8 +6,8 @@ interface BarbershopState {
     serviceId: number | null,
     appointmentTime: string | null,
     appointmentDate: Dayjs | null,
-    client_phone: string | null,
-    client_name: string | null,
+    clientPhone: string | null,
+    clientName: string | null,
 }
 
 const initialState: BarbershopState = {
@@ -15,8 +15,8 @@ const initialState: BarbershopState = {
     serviceId: null,
     appointmentTime: null,
     appointmentDate: dayjs(),
-    client_phone: null,
-    client_name: null
+    clientPhone: null,
+    clientName: null
 }
 export const barbershopSlice = createSlice({
     name: 'barbershop',
@@ -35,10 +35,10 @@ export const barbershopSlice = createSlice({
             state.appointmentDate = action.payload
         },
         selectNewClientPhone: (state, action) => {
-            state.client_phone = action.payload
+            state.clientPhone = action.payload
         },
         selectNewClientName: (state, action) => {
-            state.client_name = action.payload
+            state.clientName = action.payload
         }
     }
 })
