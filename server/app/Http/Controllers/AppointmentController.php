@@ -11,11 +11,11 @@ use Illuminate\Support\Facades\App;
 class AppointmentController extends Controller
 {
     public function createAppointment(Request $request) {
-        $day = Day::query()->where('date', $request->appointmentTime)->first();
+        $day = Day::query()->where('date', $request->appointmentDate)->first();
         $timeSlot = time_slot::query()->where('barber_id', $request->barberId)
             ->where('day_id', $day->id)
             ->where('time', $request->appointmentTime)
-            ->where('client_name', null);
+            ->where('client_name', null)->first();
         $newAppointment = Appointment::query()->create([
             'time_slot_id' => $timeSlot->id,
             'barber_id' => $request->barberId,
