@@ -10,13 +10,13 @@ import SubmitButton from "../components/SubmitButton";
 import {useDispatch} from "react-redux";
 import {selectNewAppointmentDate} from "../features/barber/barbershopSlice";
 
-interface time_slot {
+interface timeSlot {
     id: number,
-    barber_id: number,
-    day_id: number,
+    barberId: number,
+    dayId: number,
     time: string,
-    client_name: string,
-    client_phone: string,
+    clientName: string,
+    clientPhone: string,
 }
 function Appointment() {
     const barberId = useAppSelector((state) => state.barbershop.barberId)
@@ -24,7 +24,7 @@ function Appointment() {
     const appointmentDate = useAppSelector((state) => state.barbershop.appointmentDate)
     const dispatch = useDispatch()
     const [formatDate, setFormatDate] = useState<string | undefined>(dayjs().format('YYYY-MM-DD'));
-    const [freeTime, setFreeTime] = useState<Array<time_slot>>();
+    const [freeTime, setFreeTime] = useState<Array<timeSlot>>();
     const fetchBarberFreeTime = async () => {
         const response: any = await axios.get(`http://127.0.0.1:8000/api/barbers/${barberId}/getFreeTime/${formatDate}`)
             .then(response => response.data[0])
@@ -57,8 +57,8 @@ function Appointment() {
             <Box sx={{mb: 2}}>
                 <Typography>Выберите время:</Typography>
                 <Grid container spacing={2} sx={{mt:0.2}}>
-                    { freeTime?.map((time_slot) => {
-                        return <CalendarItem time_slot={time_slot} key={time_slot.id}/>
+                    { freeTime?.map((timeSlot) => {
+                        return <CalendarItem timeSlot={timeSlot} key={timeSlot.id}/>
                     }) }
                 </Grid>
             </Box>
