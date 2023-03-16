@@ -14,7 +14,7 @@ const initialState: BarbershopState = {
     barberId: null,
     serviceId: null,
     appointmentTime: null,
-    appointmentDate: dayjs(),
+    appointmentDate: dayjs().add(1, 'd'),
     clientPhone: null,
     clientName: null
 }

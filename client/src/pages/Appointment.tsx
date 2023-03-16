@@ -48,6 +48,7 @@ function Appointment() {
                                 label={'Выберите дату'}
                                 inputFormat={'DD-MM-YYYY'}
                                 maxDate={dayjs().add(2, 'M')}
+                                minDate={dayjs().add(1, 'd')}
                     />
                 </LocalizationProvider>
             </Box>
