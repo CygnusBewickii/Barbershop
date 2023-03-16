@@ -4,11 +4,9 @@ import {useEffect} from "react";
 function useRedirectOnReload(barberId: number | null, navigate: Function) {
     useEffect(() => {
         if (barberId == null) {
-            return navigate('/barbers')
+            return navigate('/')
         }
-        else {
-            return
-        }
+        return
     }, [])
 }
 
