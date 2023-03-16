@@ -25,7 +25,7 @@ function PersonalData() {
             clientName: clientName,
             clientPhone: clientPhone,
         }).catch(error => alert(error));
-        return navigate("/appointments/success");
+        return navigate("/appointment/success");
     }
     return(
         <Box sx={{

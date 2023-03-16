@@ -14,6 +14,7 @@ import Barbers from "./pages/Barbers";
 import Services from "./pages/Services";
 import Appointment from "./pages/Appointment";
 import PersonalData from "./pages/PersonalData";
+import AppointmentSuccess from "./pages/AppointmentSuccess";
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
@@ -26,6 +27,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
                       <Route path="/services" element={<Services/>}/>
                       <Route path="/appointment" element={<Appointment/>}/>
                       <Route path="/appointment/personal_data" element={<PersonalData/>}/>
+                      <Route path="/appointment/success" element={<AppointmentSuccess/>}/>
                   </Route>
               </Routes>
           </BrowserRouter>

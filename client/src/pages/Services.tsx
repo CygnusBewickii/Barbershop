@@ -5,6 +5,7 @@ import {useEffect, useState} from "react";
 import ServiceCard from "../components/ServiceCard";
 import SubmitButton from "../components/SubmitButton";
 import Loading from "../components/Loading";
+import redirectToBarberPage from "../utils/redirectToBarberPage";
 
 interface Service {
     id: number,
@@ -25,6 +26,7 @@ function Services() {
         setIsLoading(false)
     }
 
+    useEffect(() => {redirectToBarberPage(barberId)}, []);
     useEffect(() => {fetchServices()}, [])
 
     return(
