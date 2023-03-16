@@ -3,8 +3,9 @@ import PhoneNumberInput from "../components/PhoneNumberInput";
 import {useAppSelector} from "../hooks";
 import {useDispatch} from "react-redux";
 import {selectNewClientName} from "../features/barber/barbershopSlice";
-import axios from "axios";
 import {useNavigate} from "react-router-dom";
+import useRedirectOnReload from "../hooks/useRedirectOnReaload";
+import createAppointment from "../utils/createAppointment";
 
 function PersonalData() {
     const barberId = useAppSelector((state) => state.barbershop.barberId);
@@ -16,17 +17,20 @@ function PersonalData() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const createAppointment = async () => {
-        await axios.post('http://127.0.0.1:8000/api/appointments/createAppointment', {
-            barberId: barberId,
-            serviceId: serviceId,
-            appointmentTime: appointmentTime,
-            appointmentDate: appointmentDate?.format('YYYY-MM-DD'),
-            clientName: clientName,
-            clientPhone: clientPhone,
-        }).catch(error => alert(error));
-        return navigate("/appointment/success");
+    useRedirectOnReload(barberId, navigate);
+
+    const handleCreateAppointmentButton = () => {
+        const clientInfo = {
+            barberId,
+            serviceId,
+            appointmentTime,
+            appointmentDate,
+            clientName,
+            clientPhone,
+        }
+        createAppointment(clientInfo, navigate)
     }
+
     return(
         <Box sx={{
             bgcolor: 'white',
@@ -52,7 +56,7 @@ function PersonalData() {
                 }}>
                     <PhoneNumberInput/>
                 </Box>
-                <Button type='submit' variant='contained' onClick={createAppointment} sx={{
+                <Button type='submit' variant='contained' onClick={handleCreateAppointmentButton} sx={{
                     bgcolor: 'black',
                     '&:hover': {
                         bgcolor: 'black'

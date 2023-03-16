@@ -5,7 +5,8 @@ import {useEffect, useState} from "react";
 import ServiceCard from "../components/ServiceCard";
 import SubmitButton from "../components/SubmitButton";
 import Loading from "../components/Loading";
-import redirectToBarberPage from "../utils/redirectToBarberPage";
+import useRedirectOnReload from "../hooks/useRedirectOnReaload";
+import {useNavigate} from "react-router-dom";
 
 interface Service {
     id: number,
@@ -14,10 +15,11 @@ interface Service {
     description: string
 }
 function Services() {
-    const [isLoading, setIsLoading] = useState<boolean>()
-    const barberId = useAppSelector((state) => state.barbershop.barberId)
-    const serviceId = useAppSelector((state) => state.barbershop.serviceId)
+    const [isLoading, setIsLoading] = useState<boolean>();
+    const barberId = useAppSelector((state) => state.barbershop.barberId);
+    const serviceId = useAppSelector((state) => state.barbershop.serviceId);
     const [services, setServices] = useState<Service[]>();
+    const navigate = useNavigate();
     const fetchServices = async () => {
         setIsLoading(true)
         const response = await axios.get(`http://localhost:8000/api/services/barber/${barberId}`)
@@ -26,7 +28,7 @@ function Services() {
         setIsLoading(false)
     }
 
-    useEffect(() => {redirectToBarberPage(barberId)}, []);
+    useRedirectOnReload(barberId, navigate);
     useEffect(() => {fetchServices()}, [])
 
     return(

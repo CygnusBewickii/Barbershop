@@ -9,6 +9,8 @@ import CalendarItem from "../components/CalendarItem";
 import SubmitButton from "../components/SubmitButton";
 import {useDispatch} from "react-redux";
 import {selectNewAppointmentDate} from "../features/barber/barbershopSlice";
+import {useNavigate} from "react-router-dom";
+import useRedirectOnReload from "../hooks/useRedirectOnReaload";
 
 interface timeSlot {
     id: number,
@@ -19,18 +21,20 @@ interface timeSlot {
     clientPhone: string,
 }
 function Appointment() {
-    const barberId = useAppSelector((state) => state.barbershop.barberId)
-    const appointmentTime = useAppSelector((state) => state.barbershop.appointmentTime)
-    const appointmentDate = useAppSelector((state) => state.barbershop.appointmentDate)
-    const dispatch = useDispatch()
+    const barberId = useAppSelector((state) => state.barbershop.barberId);
+    const appointmentTime = useAppSelector((state) => state.barbershop.appointmentTime);
+    const appointmentDate = useAppSelector((state) => state.barbershop.appointmentDate);
     const [formatDate, setFormatDate] = useState<string | undefined>(dayjs().format('YYYY-MM-DD'));
     const [freeTime, setFreeTime] = useState<Array<timeSlot>>();
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const fetchBarberFreeTime = async () => {
         const response: any = await axios.get(`http://127.0.0.1:8000/api/barbers/${barberId}/getFreeTime/${formatDate}`)
             .then(response => response.data[0])
         setFreeTime(response)
     }
 
+    useRedirectOnReload(barberId, navigate);
     useEffect(() => {fetchBarberFreeTime()}, [formatDate])
     useEffect(() => setFormatDate(appointmentDate?.format('YYYY-MM-DD')), [appointmentDate])
 
