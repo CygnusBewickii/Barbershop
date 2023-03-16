@@ -17,8 +17,6 @@ function PersonalData() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    useRedirectOnReload(barberId, navigate);
-
     const handleCreateAppointmentButton = () => {
         const clientInfo = {
             barberId,
@@ -30,6 +28,8 @@ function PersonalData() {
         }
         createAppointment(clientInfo, navigate)
     }
+
+    useRedirectOnReload(barberId, navigate);
 
     return(
         <Box sx={{
