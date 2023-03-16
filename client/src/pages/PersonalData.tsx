@@ -6,6 +6,7 @@ import {selectNewClientName} from "../features/barber/barbershopSlice";
 import {useNavigate} from "react-router-dom";
 import useRedirectOnReload from "../hooks/useRedirectOnReaload";
 import createAppointment from "../utils/createAppointment";
+import {useState} from "react";
 
 function PersonalData() {
     const barberId = useAppSelector((state) => state.barbershop.barberId);
@@ -14,10 +15,15 @@ function PersonalData() {
     const appointmentDate = useAppSelector(state => state.barbershop.appointmentDate)
     const clientName = useAppSelector(state => state.barbershop.clientName);
     const clientPhone = useAppSelector(state => state.barbershop.clientPhone);
+    const [isValidated, setIsValidated] = useState<boolean>(true);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
     const handleCreateAppointmentButton = () => {
+        if (clientName == null || clientPhone == null) {
+            setIsValidated(false)
+            return
+        }
         const clientInfo = {
             barberId,
             serviceId,
@@ -49,7 +55,7 @@ function PersonalData() {
                 <Box sx={{
                     mb: 1.5
                 }}>
-                    <TextField required name={"client-name"} label={"Ваше имя"} onChange={(event) => {dispatch(selectNewClientName(event.target.value))}} />
+                    <TextField error={isValidated != true && clientName == null} required name={"client-name"} label={"Ваше имя"} onChange={(event) => {dispatch(selectNewClientName(event.target.value))}} />
                 </Box>
                 <Box sx={{
                     mb: 2
