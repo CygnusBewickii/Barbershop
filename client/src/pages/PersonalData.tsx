@@ -6,7 +6,7 @@ import {selectNewClientName} from "../features/barber/barbershopSlice";
 import {useNavigate} from "react-router-dom";
 import useRedirectOnReload from "../hooks/useRedirectOnReaload";
 import createAppointment from "../utils/createAppointment";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 function PersonalData() {
     const barberId = useAppSelector((state) => state.barbershop.barberId);
@@ -20,10 +20,11 @@ function PersonalData() {
     const navigate = useNavigate();
 
     const handleCreateAppointmentButton = () => {
-        if (clientName == null || clientPhone == null) {
+        if (clientName == null || clientPhone == null || clientName === "" || clientPhone === "") {
             setIsValidated(false)
             return
         }
+        setIsValidated(true)
         const clientInfo = {
             barberId,
             serviceId,
@@ -35,6 +36,7 @@ function PersonalData() {
         createAppointment(clientInfo, navigate)
     }
 
+    useEffect(() => setIsValidated(true), [clientName, clientPhone])
     useRedirectOnReload(barberId, navigate);
 
     return(
@@ -60,9 +62,9 @@ function PersonalData() {
                 <Box sx={{
                     mb: 2
                 }}>
-                    <PhoneNumberInput/>
+                    <PhoneNumberInput isValidated={isValidated}/>
                 </Box>
-                <Button type='submit' variant='contained' onClick={handleCreateAppointmentButton} sx={{
+                <Button disabled={isValidated != true} type='submit' variant='contained' onClick={handleCreateAppointmentButton} sx={{
                     bgcolor: 'black',
                     '&:hover': {
                         bgcolor: 'black'
