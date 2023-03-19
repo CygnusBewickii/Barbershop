@@ -32,18 +32,26 @@ function serviceCard(props : any) {
                 height: 1
             }}>
                 <Stack direction="row" sx={{
-                    width: '15%'
                 }}>
-                    <div style={{
+                    <Stack style={{
                         display: 'flex',
-                        alignItems: 'center',
+                        alignItems: 'start',
                         marginLeft: 20
                     }}>
-                        <Typography variant={"body1"} sx={{
-                            fontWeight: 'bold',
-                            fontSize: 22
-                        }}>{props.service.name}</Typography>
-                    </div>
+                        <Box>
+                            <Typography variant={"body1"} sx={{
+                                fontSize: 18
+                            }}>{props.service.name}</Typography>
+                        </Box>
+                        <Box>
+                            <Typography variant={"body1"} sx={{
+                                fontSize: 16,
+                                fontWeight: 'bold'
+                            }}>
+                                {props.service.price}
+                            </Typography>
+                        </Box>
+                    </Stack>
                 </Stack>
                 <div onClick={() => setIsOpen(true)}>
                     <InfoIcon fontSize={"large"} sx={{
